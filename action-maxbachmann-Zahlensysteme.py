@@ -51,9 +51,9 @@ def message(client, userdata, msg):
         elif slots['type'] == 'hexadezimal':
             value_new = hex(slots['value'])
         
-        for buchstabe in value_new:
+        for buchstabe in value_new[:-1]:
             answer += buchstabe + ' <break time="300ms"/> '
-        answer += '</speak>'
+        answer += value_new[-1] + '</speak>'
         say(session_id, answer)
     except KeyError:
         pass
