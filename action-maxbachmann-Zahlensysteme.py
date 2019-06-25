@@ -39,15 +39,15 @@ def message(client, userdata, msg):
     try:
         slots = {slot['slotName']: slot['value']['value'] for slot in data['slots']}
 
-        answer = '<speak>' + slots['value'] + ' ist als ' + slots['type'] + 'zahl '
+        answer = '<speak>' + int(slots['value']) + ' ist als ' + slots['type'] + 'zahl '
         value_new = ''
 
         if slots['type'] == 'binär':
-            value_new = bin(slots['value'])
+            value_new = bin(int(slots['value']))
         elif slots['type'] == 'oktal':
-            value_new = oct(slots['value'])
+            value_new = oct(int(slots['value']))
         elif slots['type'] == 'hexadezimal':
-            value_new = hex(slots['value'])
+            value_new = hex(int(slots['value']))
         
         for buchstabe in value_new[:-1]:
             answer += buchstabe + ' <break time="300ms"/> '
