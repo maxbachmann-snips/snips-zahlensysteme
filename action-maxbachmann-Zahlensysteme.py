@@ -46,7 +46,7 @@ def message(client, userdata, msg):
         elif slots['type'] == 'hexadezimal':
             value_new = hex(int(slots['value']))
         
-        answer = '<speak>{} ist als {}zahl {}</speak>'.format(
+        answer = '{} ist als {}zahl {}'.format(
             slots['value'],
             slots['type'],
             '<break time="300ms"/> '.join(value_new)
