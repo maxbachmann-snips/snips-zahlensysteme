@@ -39,9 +39,6 @@ def message(client, userdata, msg):
     try:
         slots = {slot['slotName']: slot['value']['value'] for slot in data['slots']}
 
-        answer = '<speak>' + int(slots['value']) + ' ist als ' + slots['type'] + 'zahl '
-        value_new = ''
-
         if slots['type'] == 'binär':
             value_new = bin(int(slots['value']))
         elif slots['type'] == 'oktal':
@@ -49,9 +46,11 @@ def message(client, userdata, msg):
         elif slots['type'] == 'hexadezimal':
             value_new = hex(int(slots['value']))
         
-        for buchstabe in value_new[:-1]:
-            answer += buchstabe + ' <break time="300ms"/> '
-        answer += value_new[-1] + '</speak>'
+        answer = '<speak>{} ist als {}zahl {}</speak>'.format(
+            slots['value'],
+            slots['type'],
+            '<break time="300ms"/> '.join(value_new)
+        )
         say(session_id, answer)
     except KeyError:
         pass
